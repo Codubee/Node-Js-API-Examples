@@ -1,44 +1,20 @@
-const express = require('express')
-const app = express()
-const axios = require('axios');
+// Load HTTP module
+const http = require("http");
 
-//This endpoint has no route parameters
-app.get('/getEndpoint', function (req, res) {
+const hostname = "127.0.0.1";
+const port = 8000;
 
-    axios.get('https://api.agify.io?name=Mike')
-    .then(function (response) {
-        // handle success and send back a 200 response with the data
-        console.log(response.data);
-        res.status(200).json(response.data);
-    })
-    .catch(function (error) {
-        // It is good practice to handle the error and send back the 
-        // error message that was received from the API call
-        console.log(error)
-        res.status(400).json({error:"An error occurred"});
-    })
+// Create HTTP server 
+const server = http.createServer((req, res) => {
+
+   // Set the response HTTP header with HTTP status and Content type
+   res.writeHead(200, {'Content-Type': 'text/plain'});
+   
+   // Send the response body "Hello World"
+   res.end('Hello World\n');
+});
+
+// Prints a log once the server starts listening
+server.listen(port, hostname, () => {
+   console.log(`Server running at http://${hostname}:${port}/`);
 })
-
-
-//This endpoint has the route parameter name
-app.get('/getEndpoint/:name', function (req, res) {
-
-    //Log the request parameters
-    console.log(req.params.name)
-    let name = req.params.name;
-
-    axios.get('https://api.agify.io?name='+name)
-    .then(function (response) {
-        // handle success and send back a 200 response with the data
-        console.log(response.data);
-        res.status(200).json(response.data);
-    })
-    .catch(function (error) {
-        // It is good practice to handle the error and send back the 
-        // error message that was received from the API call
-        console.log(error)
-        res.status(400).json({error:"An error occurred"});
-    })
-})
-
-app.listen(3000, () => console.log(`Example app listening at http://localhost:3000`))
