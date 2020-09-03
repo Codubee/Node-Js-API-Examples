@@ -1,0 +1,9 @@
+{
+  "name": "api_intro",
+  "version": "1.0.0",
+  "description": "A guide on how to build an API using Node.js",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "express": "^4.17.1"
+  }
+}
