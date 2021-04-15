@@ -13,7 +13,7 @@ const axios = require('axios');
 app.use(express.json());
 
 
-// This endpoint has no route parameters
+// This endpoint has no query parameters
 app.get('/getEndpoint', function (req, res) {
 
     axios.get('https://api.agify.io?name=Mike')
@@ -33,13 +33,15 @@ app.get('/getEndpoint', function (req, res) {
 })
 
 
-// This endpoint has the route parameter name
-app.get('/getEndpoint/:name', function (req, res) {
+// This endpoint takes in a name query parameter
+// An example request is localhost:3000/getEndpoint?name=John
+app.get('/getEndpoint', function (req, res) {
 
-    // Log the request parameters
-    console.log(req.params.name)
-    let name = req.params.name;
+    // Log the query parameters
+    console.log(req.query)
+    let name = req.query.name;
 
+    //Make a get request with the name query parameter
     axios.get('https://api.agify.io?name='+name)
     .then(function (response) {
         // handle success and send back a 200 response with the data
@@ -60,8 +62,9 @@ app.get('/getEndpoint/:name', function (req, res) {
 app.get('/usesKey', function (req, res) {
 
     /*
-        The key is placed inside of the dotenv file
-        We are simple referecing it here 
+        The key is placed inside of a dotenv file
+        We are simple referecing it here.
+        For more examples of a dotenv file refer to  https://www.npmjs.com/package/dotenv
     */
     const key = process.env.API_KEY
     
