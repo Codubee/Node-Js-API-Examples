@@ -164,19 +164,13 @@ app.post('/hasBody', function (request1, response1) {
         }
     */ 
     console.log(request1.body);
-    
-    // Create a body constant that is equal to the data coming in
-    const body = {
-        name: request1.body.name,
-        address: request1.body.address
-    }
-
+  
     /* 
         Use axios to send a POST request to the API. Here we need to make sure that
-        we are including the body constant that we created right above. If we do not 
+        we are including the body data that is coming in from the request. If we do not 
         include that then we wont be adding anyone to the database.
     */
-    axios.post('https://java-sample-api-2020.herokuapp.com/addPerson',body)
+    axios.post('https://java-sample-api-2020.herokuapp.com/addPerson',request1.body)
 
     // If everything went well and when the request is complete
     // this method handles the response
