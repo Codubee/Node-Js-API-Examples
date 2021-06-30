@@ -5,6 +5,7 @@
 // Import and initialize express. Make sure to install express using NPM
 const express = require('express')
 const app = express()
+app.use(express.json());
 
 // Creates a GET route with a path of /hello
 // To access this route you can go to localhost:8080/hello in your browser
